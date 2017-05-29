@@ -24,6 +24,10 @@ myInterval = setInterval(questionTimer,1000);
 
 var myCount;
 myCount = 0;
+
+var currentQuestion;
+currentQuestion = 0;
+
 //The function should have: 30 sec timer display, display a question and 4 possible answers,
 //and when the 30 sec is up it will switch to a screen that gives answers for 7 seconds.
 
@@ -31,7 +35,7 @@ function questionTimer(){
 
 	$("#myTimer").html(myCount);
 	
-	if(myCount > 30){
+	if(myCount > 5){
 		clearInterval(myInterval);
 
 		myInterval = setInterval(answerTimer,1000);
@@ -48,7 +52,7 @@ function answerTimer(){
 
 	$("#myTimer").html(myCount);
 
-	if(myCount > 7){
+	if(myCount > 3){
 		//stop timer
 		
 		clearInterval(myInterval);
@@ -58,16 +62,24 @@ function answerTimer(){
 		myInterval = setInterval(questionTimer,1000);
 		myCount = 0;
 		questionTimer();
+		//run next question
+		currentQuestion++;
+		questions();
 	} else {
 		myCount++;
 	}
 }
 
 function questions() {
-	for (var i = 0; i < questionArray.length; i++) {
-		$("#questionHolder").html(questionArray[i]);
-	}
-}
+	
+		$("#questionHolder").html(questionArray[currentQuestion]);
+
+		$(".answerSpace").each(function(i) {
+ 			 $(this).html(answerArray[currentQuestion][i]);
+
+	});
+
+}	
 
 questions();
 
