@@ -18,6 +18,18 @@ var answerArray = [
 ["King of the North", "Young Wolf", "Both 1 and 2", "None of the above"],
 ["King Goeffrey", "Jora Mormont", "Sandor Clegane", "Jon Snow"]
 ];
+
+//make array of correct answers
+
+var correctArray = [
+"The Flayed Man",
+"Tyrion Lannister",
+"Daenerys Targaryen",
+"July 16th, 2017",
+"Grey Worm",
+"Both 1 and 2",
+"Sandor Clegane"
+];
 //set a setTimeout to execute a function
 var myInterval;
 myInterval = setInterval(questionTimer,1000);
@@ -35,12 +47,15 @@ function questionTimer(){
 
 	$("#myTimer").html(myCount);
 	
-	if(myCount > 5){
+	if(myCount > 30){
 		clearInterval(myInterval);
-
+		correctAnswer();
 		myInterval = setInterval(answerTimer,1000);
 		myCount = 0;
+		
 		answerTimer();
+
+		
 
 	}else {
 		myCount++;
@@ -52,7 +67,7 @@ function answerTimer(){
 
 	$("#myTimer").html(myCount);
 
-	if(myCount > 3){
+	if(myCount > 7){
 		//stop timer
 		
 		clearInterval(myInterval);
@@ -61,10 +76,12 @@ function answerTimer(){
 
 		myInterval = setInterval(questionTimer,1000);
 		myCount = 0;
-		questionTimer();
-		//run next question
 		currentQuestion++;
 		questions();
+		questionTimer();
+		//run next question
+		
+		
 	} else {
 		myCount++;
 	}
@@ -72,16 +89,24 @@ function answerTimer(){
 
 function questions() {
 	
-		$("#questionHolder").html(questionArray[currentQuestion]);
+	$("#questionHolder").html(questionArray[currentQuestion]);
 
-		$(".answerSpace").each(function(i) {
- 			 $(this).html(answerArray[currentQuestion][i]);
-
+	$(".answerSpace").each(function(i) {
+		$(this).html(answerArray[currentQuestion][i]);
 	});
-
+	
+	$("#correctAnswer").empty();
 }	
 
 questions();
+
+function correctAnswer() {
+
+	$("#correctAnswer").text("Correct Answer: " + correctArray[currentQuestion]);
+	//$("#answerSpace").html();
+
+
+}
 
 //in the function: make if else statements (for the timer and for the answers clicked) AND
 //a screen that, if you choose the wrong answer it will tell you the correct one for 7 seconds
