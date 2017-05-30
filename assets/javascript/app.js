@@ -1,3 +1,5 @@
+
+
 //Make an array of questions
 var questionArray = [
 "What is the Boltons sigil?", 
@@ -43,75 +45,83 @@ currentQuestion = 0;
 //The function should have: 30 sec timer display, display a question and 4 possible answers,
 //and when the 30 sec is up it will switch to a screen that gives answers for 7 seconds.
 
-function questionTimer(){
 
-	$("#myTimer").html(myCount);
-	
-	if(myCount > 30){
-		clearInterval(myInterval);
-		correctAnswer();
-		myInterval = setInterval(answerTimer,1000);
-		myCount = 0;
+	function questionTimer(){
+
+		$("#myTimer").html(myCount + " seconds");
 		
-		answerTimer();
+		if(myCount > 30){
+			clearInterval(myInterval);
+			correctAnswer();
+			myInterval = setInterval(answerTimer,1000);
+			myCount = 0;
+			
+			answerTimer();
 
+			
+
+		}else {
+			myCount++;
+
+		}
+	}
+
+	function answerTimer(){
+
+		$("#myTimer").html(myCount + " seconds");
+
+		if(myCount > 7){
+			//stop timer
+			
+			clearInterval(myInterval);
+			//show next question
+			//retart long timer
+
+			myInterval = setInterval(questionTimer,1000);
+			myCount = 0;
+			currentQuestion++;
+			questions();
+			questionTimer();
+			//run next question
+			
+			
+		} else {
+			myCount++;
+		}
+	}
+
+	function questions() {
 		
+		$("#questionHolder").html(questionArray[currentQuestion]);
 
-	}else {
-		myCount++;
+		$(".answerSpace").each(function(i) {
+			$(this).html(answerArray[currentQuestion][i]);
+		});
+		
+		$("#correctAnswer").empty();
+	}	
+
+	questions();
+
+	function correctAnswer() {
+
+		$("#correctAnswer").text("Correct Answer: " + correctArray[currentQuestion]);
+		//$("#answerSpace").html();
+
 
 	}
-}
 
-function answerTimer(){
+	//in the function: make if else statements (for the timer and for the answers clicked) AND
+	//a screen that, if you choose the wrong answer it will tell you the correct one for 7 seconds
 
-	$("#myTimer").html(myCount);
 
-	if(myCount > 7){
-		//stop timer
+	//$()function answerGuess() {
+		//makes the guesses clickable.
+		//if you click the correct guess, it says Correct for 7 sec then goes back to timer
+		//else it says Wrong for 7 sec and goes back to timer
 		
-		clearInterval(myInterval);
-		//show next question
-		//retart long timer
+	//}
+	//create function that keeps track of how many correct and incorrect answers are chose
+	//display them at the end
 
-		myInterval = setInterval(questionTimer,1000);
-		myCount = 0;
-		currentQuestion++;
-		questions();
-		questionTimer();
-		//run next question
-		
-		
-	} else {
-		myCount++;
-	}
-}
-
-function questions() {
-	
-	$("#questionHolder").html(questionArray[currentQuestion]);
-
-	$(".answerSpace").each(function(i) {
-		$(this).html(answerArray[currentQuestion][i]);
-	});
-	
-	$("#correctAnswer").empty();
-}	
-
-questions();
-
-function correctAnswer() {
-
-	$("#correctAnswer").text("Correct Answer: " + correctArray[currentQuestion]);
-	//$("#answerSpace").html();
-
-
-}
-
-//in the function: make if else statements (for the timer and for the answers clicked) AND
-//a screen that, if you choose the wrong answer it will tell you the correct one for 7 seconds
-
-//create function that keeps track of how many correct and incorrect answers are chose
-//display them at the end
-
-//make button that restarts the entire game without refreshing it.(Only display this when all questionsa are up.)
+	//make button that restarts the entire game without refreshing it.(Only display this when all questionsa are up.)
