@@ -115,12 +115,17 @@ currentQuestion = 0;
 	//a screen that, if you choose the wrong answer it will tell you the correct one for 7 seconds
 
 
-	//$()function answerGuess() {
-		//makes the guesses clickable.
-		//if you click the correct guess, it says Correct for 7 sec then goes back to timer
-		//else it says Wrong for 7 sec and goes back to timer
-		
-	//}
+	 $(".answerSpace").click(function() {
+	// 	//makes the guesses clickable.
+	// 	//if you click the correct guess, it says Correct for 7 sec then goes back to timer
+	// 	//else it says Wrong for 7 sec and goes back to timer
+
+		 if ($(this).html() == correctArray[currentQuestion]) {
+			alert("cool");
+		} else {
+			alert("not cool");
+		}
+	 })
 	//create function that keeps track of how many correct and incorrect answers are chose
 	//display them at the end
 
