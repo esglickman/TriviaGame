@@ -121,6 +121,7 @@ currentQuestion = 0;
 	// 	//else it says Wrong for 7 sec and goes back to timer
 
 		 if ($(this).html() == correctArray[currentQuestion]) {
+		 	
 			alert("cool");
 		} else {
 			alert("not cool");
