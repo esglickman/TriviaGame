@@ -33,7 +33,7 @@ h1 {
 	width: 650px;
 	margin: 0 auto;
 	opacity: 0.8;
-	height: 500px;
+	height: 650px;
 }
 
 #mainContent {
@@ -57,5 +57,10 @@ button {
 
 button:hover {
 	background-color: steelblue;
-	
+}
+
+img {
+		position: relative;
+		margin: 0 auto;
+		width: 400px;
 }

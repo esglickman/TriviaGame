@@ -42,6 +42,12 @@ myCount = 0;
 var currentQuestion;
 currentQuestion = 0;
 
+var myWins;
+myWins = 0;
+
+var myLosses;
+myLosses = 0;
+
 //The function should have: 30 sec timer display, display a question and 4 possible answers,
 //and when the 30 sec is up it will switch to a screen that gives answers for 7 seconds.
 
@@ -91,6 +97,9 @@ currentQuestion = 0;
 	}
 
 	function questions() {
+
+		//empty the old answer
+		$("#answerSpace").empty();
 		
 		$("#questionHolder").html(questionArray[currentQuestion]);
 
@@ -115,18 +124,63 @@ currentQuestion = 0;
 	//a screen that, if you choose the wrong answer it will tell you the correct one for 7 seconds
 
 
-	 $(".answerSpace").click(function() {
+	 $(".answerSpace").click(function () {
 	// 	//makes the guesses clickable.
 	// 	//if you click the correct guess, it says Correct for 7 sec then goes back to timer
 	// 	//else it says Wrong for 7 sec and goes back to timer
 
 		 if ($(this).html() == correctArray[currentQuestion]) {
-		 	
-			alert("cool");
+
+			
+			$(".answerSpace").empty();
+			currentQuestion++;
+			myWins++;
+			$(".answerSpace").html("<h1>Correct!</h1>" + "<br> <br>" + 
+			"<img src='assets/images/correct.gif'>");
+			
+			clearInterval(myInterval);
+			myInterval = setInterval(answerTimer,1000);
+			myCount = 0;
+
+
 		} else {
-			alert("not cool");
-		}
-	 })
+
+			$(".answerSpace").empty();
+			myLosses++;
+			$(".answerSpace").html("<h1>Wrong!</h1>" + "<br> <br>" + "<img src='assets/images/wrong.gif'>");
+			
+			clearInterval(myInterval);
+			myInterval = setInterval(answerTimer,1000);
+			myCount = 0;
+
+		} 
+
+	
+
+	})
+
+
+	// function correctContinue () {
+	// 	$("#myTimer").html(myCount + " seconds");
+
+	// 	if(myCount > 7){
+	// 		//stop timer
+			
+	// 		clearInterval(myInterval);
+	// 		//show next question
+	// 		//retart long timer
+
+	// 		myInterval = setInterval(questionTimer,1000);
+	// 		myCount = 0;
+	// 		currentQuestion++;
+	// 		questionTimer();
+	// 		//run next question
+			
+			
+	// 	} else {
+	// 		myCount++;
+	// 	}
+	// }
 	//create function that keeps track of how many correct and incorrect answers are chose
 	//display them at the end
 
